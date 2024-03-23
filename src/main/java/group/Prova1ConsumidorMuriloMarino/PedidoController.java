@@ -68,11 +68,38 @@ public class PedidoController {
 
     @GetMapping("/remover/pedido/{id}")
     public String removerPedido(@PathVariable("id") int id, HttpServletRequest request) {
+        ItemCardapio cardapio = (ItemCardapio) itemCardapioRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("ID:" + id));
+
+        Pedidos pedidos = (Pedidos) request.getSession().getAttribute(SESSION_PEDIDOS);
+
+        for (Pedido pedido : pedidos) {
+            if (pedido.getCardapio().equals(cardapio)) {
+                pedido.setQuantidade(pedido.getQuantidade() - 1);
+                if (pedido.getQuantidade() <= 0) {
+                    return "redirect:/deletar/pedido/" + id;
+                }
+            }
+        }
+
+        request.getSession().setAttribute(SESSION_PEDIDOS, pedidos);
+
+        return "redirect:/pedidos";
     }
 
     @GetMapping("/deletar/pedido/{id}")
-    public void deletarPedido(@PathVariable("id") int id) {
+    public String deletarPedido(@PathVariable("id") int id, HttpServletRequest request) {
+        Pedidos pedidos = (Pedidos) request.getSession().getAttribute(SESSION_PEDIDOS);
 
+        ItemCardapio cardapio = itemCardapioRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "ID:" + id));
+
+        pedidos.remove(cardapio);
+
+        request.getSession().setAttribute(SESSION_PEDIDOS, pedidos);
+
+        return "redirect:/pedidos";
     }
 
 }
