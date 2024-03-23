@@ -1,6 +1,8 @@
 package group.Prova1ConsumidorMuriloMarino;
 
-public class Pedido {
+import java.io.Serializable;
+
+public class Pedido implements Serializable {
     private ItemCardapio cardapio;
     private int quantidade = 1;
 
