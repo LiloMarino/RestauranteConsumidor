@@ -17,6 +17,7 @@ public class PedidoController {
 
     @GetMapping("/pedidos")
     public String mostrarPedidos(Model model, HttpServletRequest request) {
+        double total = 0;
         Pedidos pedidos = (Pedidos) request.getSession().getAttribute(SESSION_PEDIDOS);
         if (!CollectionUtils.isEmpty(pedidos)) {
             Pedidos pedidosAtualizados = new Pedidos();
@@ -26,6 +27,7 @@ public class PedidoController {
                 if (cardapio != null) {
                     Pedido pedidoAtualizado = new Pedido(cardapio);
                     pedidoAtualizado.setQuantidade(pedido.getQuantidade());
+                    total += pedidoAtualizado.getSubTotal();
                     pedidosAtualizados.add(pedidoAtualizado);
                 }
             }
@@ -36,8 +38,10 @@ public class PedidoController {
         } else {
             pedidos = null;
         }
+        
         request.getSession().setAttribute(SESSION_PEDIDOS, pedidos);
         model.addAttribute("pedidos", pedidos);
+        model.addAttribute("total", total);
         return "pedidos";
     }
 

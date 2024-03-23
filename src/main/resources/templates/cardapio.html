@@ -60,7 +60,7 @@
                         <td th:text="${cardapio.descricao}"></td>
                         <td th:text="${cardapio.preco}"></td>
                         <td>
-                            <a class="btn btn-success" th:href="@{/pedir/cardapio/{id}(id=${cardapio.id})}">Pedir</a>
+                            <a class="btn btn-success" th:href="@{/adicionar/pedido/{id}(id=${cardapio.id})}">Pedir</a>
                         </td>
                     </tr>
                 </tbody>

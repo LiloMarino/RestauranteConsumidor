@@ -38,67 +38,69 @@
             </div>
         </div>
     </nav>
-
-    <section class="pt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card shadow p-3 mb-5 bg-white rounded">
-                        <div class="card-body">
-                            <h2 class="card-title">
-                                Seus Pedidos
-                            </h2>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Pedido</th>
-                                            <th>Preço</th>
-                                            <th>Quantidade</th>
-                                            <th>Subtotal</th>
-                                            <th>Remover</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                Nome do produto
-                                            </td>
-                                            <td>R$ <span class="base-price">195,00</span></td>
-                                            <td >
-                                                <div class="d-flex">
-                                                    <a href="@{/carrinho/remover/{id}(id=${item.produto.id})}"
-                                                        class="btn btn-link px-2">
-                                                        <i class="fa fa-minus"></i>
+    <div th:switch="${pedidos}">
+        <div class="alert alert-warning" th:case="null">
+            Não existem pedidos
+        </div>
+        <section class="pt-5" th:case="*">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow p-3 mb-5 bg-white rounded">
+                            <div class="card-body">
+                                <h2 class="card-title">
+                                    Seus Pedidos
+                                </h2>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Pedido</th>
+                                                <th>Preço</th>
+                                                <th>Quantidade</th>
+                                                <th>Subtotal</th>
+                                                <th>Remover</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="pedido : ${pedidos}">
+                                                <td th:text="${pedido.cardapio.nome}"></td>
+                                                <td th:text="${pedido.cardapio.preco}"></td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a th:href="@{/remover/pedido/{id}(id=${pedido.cardapio.id})}"
+                                                            class="btn btn-link px-2">
+                                                            <i class="fa fa-minus"></i>
+                                                        </a>
+                                                        <input type="number" class="form-control" th:value="${pedido.quantidade}"
+                                                            style="width: 80px;">
+                                                        <a th:href="@{/adicionar/pedido/{id}(id=${pedido.cardapio.id})}"
+                                                            class="btn btn-link px-2">
+                                                            <i class="fa fa-plus"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <td th:text="${pedido.subTotal}"></td>
+                                                <td>
+                                                    <a class="btn btn-danger" th:href="@{/deletar/pedido/{id}(id=${pedido.cardapio.id})}">
+                                                        <i class="fa fa-times"></i>
                                                     </a>
-                                                    <input type="number" class="form-control" value="1"
-                                                        style="width: 80px;">
-                                                    <a href="@{/carrinho/adicionar/{id}(id=${item.produto.id})}"
-                                                        class="btn btn-link px-2">
-                                                        <i class="fa fa-plus"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                            <td>R$ <span class="total-price">195,00</span></td>
-                                            <td>
-                                                <button class="btn btn-danger">
-                                                    <i class="fas fa-times"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="text-end mt-4">
-                                <h4>Total: <strong>R$ <span id="totalPrice"
-                                            style="font-size: 1.5em;">195,00</span></strong></h4>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="text-end mt-4">
+                                    <h4>Total: <strong>R$ <span
+                                                style="font-size: 1.5em;" th:text="${total}"></span></strong></h4>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
 
 

@@ -25,4 +25,9 @@ public class Pedido {
             this.quantidade = quantidade;
         }
     }
+
+    public double getSubTotal()
+    {
+        return this.quantidade * this.cardapio.getPreco();
+    }
 }
