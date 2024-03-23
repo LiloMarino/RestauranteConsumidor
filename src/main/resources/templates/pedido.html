@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
@@ -19,7 +19,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/index"><b th:text="'Cardápio - ' + ${restaurante.nome}"></b></a>
+            <a class="navbar-brand" href="/index"><b>Restaurante</b></a>
             <div class="navbar-text">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,42 +31,14 @@
                             <a class="nav-link" href="/index">Home <i class="fa fa-home"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/pedido">Ver Pedido <i
-                                    class="fa-solid fa-receipt"></i></a>
+                            <a class="nav-link" href="/pedido">Ver Pedido <i class="fa-solid fa-receipt"></i></a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
     </nav>
-    <!-- Tabela -->
-    <div class="panel-body" th:switch="${cardapios}">
-        <div class="alert alert-warning" th:case="null">
-            Não existem cardápios
-        </div>
-        <div class="table-responsive" th:case="*">
-            <table class="table table-hover table-bordered align-middle">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Nome</th>
-                        <th>Descrição</th>
-                        <th>Preço</th>
-                        <th>Ação</th>
-                    </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                    <tr th:each="cardapio : ${cardapios}">
-                        <td th:text="${cardapio.nome}"></td>
-                        <td th:text="${cardapio.descricao}"></td>
-                        <td th:text="${cardapio.preco}"></td>
-                        <td>
-                            <a class="btn btn-success" th:href="@{/pedir/cardapio/{id}(id=${cardapio.id})}">Pedir</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+    
 </body>
 
 </html>
