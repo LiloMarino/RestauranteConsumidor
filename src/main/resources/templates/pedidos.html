@@ -55,7 +55,8 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>Pedido</th>
+                                                <th>Restaurante</th>
+                                                <th>Item</th>
                                                 <th>Preço</th>
                                                 <th>Quantidade</th>
                                                 <th>Subtotal</th>
@@ -64,8 +65,9 @@
                                         </thead>
                                         <tbody>
                                             <tr th:each="pedido : ${pedidos}">
+                                                <td th:text="${pedido.cardapio.restaurante.nome}"></td>
                                                 <td th:text="${pedido.cardapio.nome}"></td>
-                                                <td th:text="${pedido.cardapio.preco}"></td>
+                                                <td th:text="${pedido.cardapio.precoString}"></td>
                                                 <td>
                                                     <div class="d-flex">
                                                         <a th:href="@{/remover/pedido/{id}(id=${pedido.cardapio.id})}"
@@ -80,7 +82,7 @@
                                                         </a>
                                                     </div>
                                                 </td>
-                                                <td th:text="${pedido.subTotal}"></td>
+                                                <td th:text="${pedido.subTotalString}"></td>
                                                 <td>
                                                     <a class="btn btn-danger" th:href="@{/deletar/pedido/{id}(id=${pedido.cardapio.id})}">
                                                         <i class="fa fa-times"></i>

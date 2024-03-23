@@ -1,6 +1,7 @@
 package group.Prova1ConsumidorMuriloMarino;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 public class Pedido implements Serializable {
     private ItemCardapio cardapio;
@@ -28,8 +29,13 @@ public class Pedido implements Serializable {
         }
     }
 
-    public double getSubTotal()
-    {
+    public double getSubTotal() {
         return this.quantidade * this.cardapio.getPreco();
+    }
+
+    public String getSubTotalString() {
+        DecimalFormat df = new DecimalFormat("#0.00");
+
+        return "R$" + df.format(this.getSubTotal());
     }
 }

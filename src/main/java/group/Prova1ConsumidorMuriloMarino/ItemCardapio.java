@@ -1,6 +1,7 @@
 package group.Prova1ConsumidorMuriloMarino;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -55,8 +56,13 @@ public class ItemCardapio implements Serializable {
         return preco;
     }
 
+    public String getPrecoString() {
+        DecimalFormat df = new DecimalFormat("#0.00");
+        return "R$" + df.format(preco);
+    }
+
     public void setPreco(double preco) {
-        this.preco = preco;
+        this.preco = preco; 
     }
 
     public Restaurante getRestaurante() {

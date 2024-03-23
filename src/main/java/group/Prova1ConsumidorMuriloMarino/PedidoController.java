@@ -1,5 +1,7 @@
 package group.Prova1ConsumidorMuriloMarino;
 
+import java.text.DecimalFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,10 +40,10 @@ public class PedidoController {
         } else {
             pedidos = null;
         }
-        
+        DecimalFormat df = new DecimalFormat("#0.00");
         request.getSession().setAttribute(SESSION_PEDIDOS, pedidos);
         model.addAttribute("pedidos", pedidos);
-        model.addAttribute("total", total);
+        model.addAttribute("total", df.format(total));
         return "pedidos";
     }
 
