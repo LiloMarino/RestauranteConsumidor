@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Pedidos extends ArrayList<Pedido> {
     @Override
     public boolean contains(Object o) {
-        if (o instanceof Pedido) {
+        if (o instanceof ItemCardapio) {
             ItemCardapio cardapio = (ItemCardapio) o;
             for (Pedido item : this) {
                 if (item.getCardapio().equals(cardapio)) {

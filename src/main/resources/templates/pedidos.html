@@ -72,7 +72,7 @@
                                                             class="btn btn-link px-2">
                                                             <i class="fa fa-minus"></i>
                                                         </a>
-                                                        <input type="number" class="form-control" th:value="${pedido.quantidade}"
+                                                        <input disabled class="form-control text-center" th:value="${pedido.quantidade}"
                                                             style="width: 80px;">
                                                         <a th:href="@{/adicionar/pedido/{id}(id=${pedido.cardapio.id})}"
                                                             class="btn btn-link px-2">
